@@ -1,0 +1,9 @@
+<div class="page">
+  <h1 class="title">Quick Capture</h1>
+
+  <app-capture-box (saved)="onSaved($event)"></app-capture-box>
+
+  <app-trigger-card [item]="lastSaved"></app-trigger-card>
+
+  <app-item-list [items]="items" (deleteItem)="onDelete($event)"></app-item-list>
+</div>

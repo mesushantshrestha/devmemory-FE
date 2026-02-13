@@ -1,0 +1,22 @@
+<div class="box">
+  <div class="chips">
+    <button
+      type="button"
+      class="chip"
+      *ngFor="let t of quickTypes"
+      [class.active]="type === t.value"
+      (click)="type = t.value"
+    >
+      {{ t.label }}
+    </button>
+  </div>
+
+  <textarea
+    [(ngModel)]="text"
+    class="input"
+    rows="3"
+    placeholder="Type it quick…"
+  ></textarea>
+
+  <button class="save" type="button" (click)="save()">Save</button>
+</div>

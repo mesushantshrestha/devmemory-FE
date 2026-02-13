@@ -1,0 +1,12 @@
+<div class="card" *ngIf="item; else empty">
+  <div class="header">Next (Trigger Card)</div>
+  <div class="text">Saved: "{{ item.text }}"</div>
+  <div class="hint">Later: we’ll generate reminders / follow-ups based on rules.</div>
+</div>
+
+<ng-template #empty>
+  <div class="card muted">
+    <div class="header">Trigger Card</div>
+    <div class="hint">Save something to see trigger suggestions.</div>
+  </div>
+</ng-template>

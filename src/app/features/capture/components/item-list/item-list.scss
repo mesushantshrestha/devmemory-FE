@@ -1,0 +1,32 @@
+.list {
+  margin-top: 16px;
+}
+
+.list-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.row {
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.del {
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+}

@@ -1,0 +1,17 @@
+<div class="list">
+  <div class="list-title">Saved Items</div>
+
+  <div class="empty" *ngIf="items.length === 0">Nothing saved yet.</div>
+
+  <div class="row" *ngFor="let item of items">
+    <div class="meta">
+      <span class="type">{{ item.type }}</span>
+      <span class="date">{{ item.createdAt | date : 'short' }}</span>
+    </div>
+    <div class="text">{{ item.text }}</div>
+
+    <button class="del" type="button" (click)="deleteItem.emit(item.id)">
+      Delete
+    </button>
+  </div>
+</div>
