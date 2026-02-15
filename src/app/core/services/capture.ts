@@ -31,4 +31,8 @@ export class CaptureService {
   clear(): void {
     this.repo.clear().pipe(take(1)).subscribe(items => this._items$.next(items));
   }
+
+  update(id: string, patch: Partial<CaptureItem>): void {
+  this.repo.update(id, patch).pipe(take(1)).subscribe(items => this._items$.next(items));
+}
 }

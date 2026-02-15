@@ -4,5 +4,7 @@ export interface CaptureItem {
     text: string;
     createdAt: string; // ISO
     type: 'remember' | 'task' | 'idea' | 'snippet';
-    language?: string;      // only for snippets
+    language?: string; 
+    pinned?: boolean;
+    done?: boolean; // for tasks
 }

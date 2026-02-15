@@ -46,4 +46,12 @@ export class LocalCaptureRepository implements CaptureRepository {
       // ignore storage errors
     }
   }
+
+  update(id: string, patch: Partial<CaptureItem>) {
+    const next = this.load().map(item =>
+        item.id === id ? { ...item, ...patch } : item
+        );
+        this.save(next);
+        return of(next);
+        }
 }

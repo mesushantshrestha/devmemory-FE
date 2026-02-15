@@ -6,6 +6,7 @@ export interface CaptureRepository {
   getAll(): Observable<CaptureItem[]>;
   add(item: CaptureItem): Observable<CaptureItem[]>;
   remove(id: string): Observable<CaptureItem[]>;
+  update(id: string, patch: Partial<CaptureItem>): Observable<CaptureItem[]>; 
   clear(): Observable<CaptureItem[]>;
 }
 

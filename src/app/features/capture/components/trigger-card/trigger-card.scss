@@ -11,9 +11,91 @@
 
 .header {
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.hint {
+.type {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.title {
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.btn-pin {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0.7;
+  font-size: 12px;
+  font-weight: 500;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.pin-icon {
+  font-size: 16px;
+}
+
+.pin-text {
+  display: inline;
+}
+
+.select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.copied {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.body {
+  margin-top: 10px;
+}
+
+.code {
+  background: #111;
+  color: #f5f5f5;
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
   font-size: 13px;
+  font-family: monospace;
+  max-height: 220px;
+}
+
+.text {
+  padding: 10px 0;
+  white-space: pre-wrap;
 }

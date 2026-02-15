@@ -5,7 +5,16 @@
 
   <app-capture-box (saved)="onSaved($event)"></app-capture-box>
 
-  <app-trigger-card [item]="(lastSaved$ | async) ?? undefined"></app-trigger-card>
+<ng-container *ngIf="activeTriggerItem$ | async as active; else empty">
+  <app-trigger-card
+    [item]="active"
+    [isPinned]="pinnedTriggerId === active.id"
+    (trigger)="onTrigger($event, active)"
+  ></app-trigger-card>
+</ng-container>
 
+<ng-template #empty>
+  <app-trigger-card></app-trigger-card>
+</ng-template>
   <a class="saved-link" routerLink="/saved">Go to Saved Items →</a>
 </div>

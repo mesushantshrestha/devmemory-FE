@@ -1,12 +1,30 @@
 <div class="card" *ngIf="item; else empty">
-  <div class="header">Next (Trigger Card)</div>
-  <div class="text">Saved: "{{ item.text }}"</div>
-  <div class="hint">Later: we’ll generate reminders / follow-ups based on rules.</div>
+  <div class="header">
+    <span>Trigger Card</span>
+    <button class="btn-pin" type="button" (click)="onPin()" [title]="isPinned ? 'Unpin' : 'Pin'">
+      <span class="pin-icon">{{ isPinned ? '📌' : '📍' }}</span>
+      <span class="pin-text">{{ isPinned ? 'Pinned' : 'Pin' }}</span>
+    </button>
+  </div>
+
+  <div class="summary">
+    <div class="type">
+      {{ item.type }} <span *ngIf="item.language">• {{ item.language }}</span>
+    </div>
+    <div class="title" *ngIf="item.title">{{ item.title }}</div>
+    <div class="body" *ngIf="item">
+      <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
+      <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
+    </div>
+  </div>
+
+  <div class="actions">
+  </div>
 </div>
 
 <ng-template #empty>
   <div class="card muted">
     <div class="header">Trigger Card</div>
-    <div class="hint">Save something to see trigger suggestions.</div>
+    <div class="hint">Save something to see suggestions.</div>
   </div>
 </ng-template>
