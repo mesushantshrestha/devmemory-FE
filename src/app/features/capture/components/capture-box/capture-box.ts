@@ -20,21 +20,26 @@ export class CaptureBox {
     { label: 'Remember', value: 'remember' },
     { label: 'Task', value: 'task' },
     { label: 'Idea', value: 'idea' },
+    { label: 'Snippet', value: 'snippet' }
   ];
+
+  languages = ['Java', 'TypeScript', 'Solidity', 'Bash', 'SQL'];
+  language = 'TypeScript';
 
   save() {
     const trimmed = this.text.trim();
     if (!trimmed) return;
 
     const item: CaptureItem = {
-      id: crypto.randomUUID(),
-      text: trimmed,
-      type: this.type,
-      createdAt: new Date().toISOString(),
-    };
+    id: crypto.randomUUID(),
+    text: trimmed,
+    type: this.type,
+    createdAt: new Date().toISOString(),
+    language: this.type === 'snippet' ? this.language : undefined
+  };
 
-    this.saved.emit(item);
-    this.text = '';
+  this.saved.emit(item);
+  this.text = '';
   }
 
 }

@@ -11,6 +11,16 @@
     </button>
   </div>
 
+  <div *ngIf="type === 'snippet'" class="language-select">
+    <label>Language:</label>
+    <select [(ngModel)]="language">
+      <option *ngFor="let lang of languages" [value]="lang">
+        {{ lang }}
+      </option>
+    </select>
+  </div>
+
+
   <textarea
     [(ngModel)]="text"
     class="input"

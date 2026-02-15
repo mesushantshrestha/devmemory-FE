@@ -8,10 +8,42 @@
       <span class="type">{{ item.type }}</span>
       <span class="date">{{ item.createdAt | date : 'short' }}</span>
     </div>
-    <div class="text">{{ item.text }}</div>
+    <div class="text" *ngIf="item.type !== 'snippet'">
+      {{ item.text }}
+    </div>
 
-    <button class="del" type="button" (click)="deleteItem.emit(item.id)">
+    <pre class="code" *ngIf="item.type === 'snippet'">
+    {{ item.text }}
+    </pre>
+
+    <div class="lang" *ngIf="item.type === 'snippet'">
+      {{ item.language }}
+    </div>
+    <div class="snippet-actions" *ngIf="item.type === 'snippet'">
+      <button
+        class="copy"
+        type="button"
+        (click)="copySnippet(item.text, item.id)"
+      >
+        {{ copiedId === item.id ? 'Copied ✅' : 'Copy' }}
+      </button>
+    </div>
+
+    <!-- Normal Delete Button -->
+    <button
+      *ngIf="confirmId !== item.id"
+      class="del"
+      type="button"
+      (click)="requestDelete(item.id)"
+    >
       Delete
     </button>
+
+    <!-- Confirmation UI -->
+    <div class="confirm" *ngIf="confirmId === item.id">
+      <span>Are you sure?</span>
+      <button class="yes" (click)="confirmDelete()">Yes</button>
+      <button class="no" (click)="cancelDelete()">No</button>
+    </div>
   </div>
 </div>

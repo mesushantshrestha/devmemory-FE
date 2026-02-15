@@ -30,3 +30,52 @@
   border: 1px solid #ddd;
   background: #fff;
 }
+
+.confirm {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.yes {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 0;
+  background: #111;
+  color: white;
+}
+
+.no {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.code {
+  background: #111;
+  color: #f5f5f5;
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 13px;
+  font-family: monospace;
+}
+
+.lang {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.snippet-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.copy {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+}

@@ -3,7 +3,10 @@
 
   <app-capture-box (saved)="onSaved($event)"></app-capture-box>
 
-  <app-trigger-card [item]="lastSaved"></app-trigger-card>
+  <app-trigger-card [item]="(lastSaved$ | async) ?? undefined"></app-trigger-card>
 
-  <app-item-list [items]="items" (deleteItem)="onDelete($event)"></app-item-list>
+  <app-item-list
+    [items]="(items$ | async) ?? []"
+    (deleteItem)="onDelete($event)"
+  ></app-item-list>
 </div>
