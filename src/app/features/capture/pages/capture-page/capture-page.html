@@ -5,8 +5,27 @@
 
   <app-trigger-card [item]="(lastSaved$ | async) ?? undefined"></app-trigger-card>
 
+  <!-- Search -->
+  <div class="search">
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search (text, type, language)…"
+      [ngModel]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+    />
+    <button
+      class="search-clear"
+      type="button"
+      (click)="clearSearch()"
+      [disabled]="!searchTerm"
+    >
+      Clear
+    </button>
+  </div>
+
   <app-item-list
-    [items]="(items$ | async) ?? []"
+    [items]="(filteredItems$ | async) ?? []"
     (deleteItem)="onDelete($event)"
   ></app-item-list>
 </div>
