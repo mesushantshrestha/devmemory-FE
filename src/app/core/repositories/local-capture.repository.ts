@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { CaptureItem } from '../models/capture-item';
 import { CaptureRepository } from './capture.repository';

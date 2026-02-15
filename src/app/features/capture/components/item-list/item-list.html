@@ -8,6 +8,15 @@
       <span class="type">{{ item.type }}</span>
       <span class="date">{{ item.createdAt | date : 'short' }}</span>
     </div>
+
+    <div class="lang" *ngIf="item.type === 'snippet'">
+      {{ item.language }}
+    </div>
+    
+    <div class="item-title" *ngIf="item.title">
+      {{ item.title }}
+    </div>
+
     <div class="text" *ngIf="item.type !== 'snippet'">
       {{ item.text }}
     </div>
@@ -16,17 +25,15 @@
     {{ item.text }}
     </pre>
 
-    <div class="lang" *ngIf="item.type === 'snippet'">
-      {{ item.language }}
-    </div>
+
     <div class="snippet-actions" *ngIf="item.type === 'snippet'">
-      <button
-        class="copy"
-        type="button"
-        (click)="copySnippet(item.text, item.id)"
-      >
-        {{ copiedId === item.id ? 'Copied ✅' : 'Copy' }}
-      </button>
+    <button
+      class="copy"
+      type="button"
+      (click)="copySnippet(item.text, item.id)"
+    >
+      {{ copiedId === item.id ? 'Copied ✅' : 'Copy' }}
+    </button>
     </div>
 
     <!-- Normal Delete Button -->

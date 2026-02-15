@@ -7,25 +7,42 @@
 
   <!-- Search -->
   <div class="search">
-    <input
-      class="search-input"
-      type="text"
-      placeholder="Search (text, type, language)…"
-      [ngModel]="searchTerm"
-      (ngModelChange)="onSearchChange($event)"
-    />
-    <button
-      class="search-clear"
-      type="button"
-      (click)="clearSearch()"
-      [disabled]="!searchTerm"
-    >
-      Clear
-    </button>
-  </div>
+  <input
+    class="search-input"
+    type="text"
+    placeholder="Search (title, text, type, language)…"
+    [ngModel]="searchTerm"
+    (ngModelChange)="onSearchChange($event)"
+  />
 
-  <app-item-list
-    [items]="(filteredItems$ | async) ?? []"
-    (deleteItem)="onDelete($event)"
-  ></app-item-list>
+  <select
+        class="filter"
+        [ngModel]="typeFilter"
+        (ngModelChange)="onTypeChange($event)"
+      >
+        <option *ngFor="let opt of typeOptions" [ngValue]="opt.value">
+          {{ opt.label }}
+        </option>
+      </select>
+
+      <select
+        class="filter"
+        [ngModel]="languageFilter"
+        (ngModelChange)="onLanguageChange($event)"
+      >
+        <option [ngValue]="'all'">All languages</option>
+        <option *ngFor="let lang of (languageOptions$ | async) ?? []" [ngValue]="lang">
+          {{ lang }}
+        </option>
+      </select>
+
+      <button class="search-clear" type="button" (click)="clearFilters()">
+        Clear
+      </button>
+    </div>
+
+    <app-item-list
+      [items]="(filteredItems$ | async) ?? []"
+      (deleteItem)="onDelete($event)"
+    ></app-item-list>
 </div>

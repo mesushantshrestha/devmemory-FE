@@ -11,17 +11,26 @@
 
 .search {
   margin-top: 14px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
   gap: 10px;
   align-items: center;
 }
 
 .search-input {
-  flex: 1;
-  padding: 10px 12px;
+  padding: 10px 2px;
   border-radius: 12px;
   border: 1px solid #ddd;
   font-size: 16px;
+  width: 100%;
+}
+
+.filter {
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
 }
 
 .search-clear {
@@ -31,6 +40,8 @@
   background: #fff;
 }
 
-.search-clear:disabled {
-  opacity: 0.5;
+@media (max-width: 680px) {
+  .search {
+    grid-template-columns: 1fr 1fr;
+  }
 }

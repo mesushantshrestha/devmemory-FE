@@ -14,6 +14,8 @@ export class CaptureBox {
   @Output() saved = new EventEmitter<CaptureItem>();
 
   text = '';
+  title = '';
+
   type: CaptureItem['type'] = 'remember';
 
   quickTypes: Array<{ label: string; value: CaptureItem['type'] }> = [
@@ -32,6 +34,7 @@ export class CaptureBox {
 
     const item: CaptureItem = {
     id: crypto.randomUUID(),
+    title: this.title.trim() || undefined,
     text: trimmed,
     type: this.type,
     createdAt: new Date().toISOString(),
@@ -40,6 +43,7 @@ export class CaptureBox {
 
   this.saved.emit(item);
   this.text = '';
+  this.title = '';
   }
 
 }
