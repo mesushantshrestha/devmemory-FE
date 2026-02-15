@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
 import { TriggerService } from '../../../../core/services/trigger-service';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 export interface Trigger {
   id: string;
@@ -13,7 +14,7 @@ export interface Trigger {
 @Component({
   selector: 'app-trigger-card',
   standalone: true,
-  imports: [CommonModule, ClipboardModule, FormsModule],
+  imports: [CommonModule, ClipboardModule, FormsModule, RouterLink],
   templateUrl: './trigger-card.html',
   styleUrl: './trigger-card.scss',
 })
@@ -44,7 +45,7 @@ export class TriggerCard implements OnChanges {
       this.pinTrigger = undefined;
     }
   }
-  
+
   onPin(): void {
     this.trigger.emit('toggle_pin');
   }

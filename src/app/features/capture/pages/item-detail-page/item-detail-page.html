@@ -1,0 +1,20 @@
+<div class="page">
+  <a routerLink="/saved">← Back</a>
+
+  <ng-container *ngIf="item$ | async as item; else notFound">
+    <h2 class="title">{{ item.title || '(No title)' }}</h2>
+
+    <div class="meta">
+      <span class="badge">{{ item.type }}</span>
+      <span class="badge" *ngIf="item.language">{{ item.language }}</span>
+      <span class="date">{{ item.createdAt | date:'medium' }}</span>
+    </div>
+
+    <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
+    <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
+  </ng-container>
+
+  <ng-template #notFound>
+    <p>Item not found.</p>
+  </ng-template>
+</div>

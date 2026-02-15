@@ -3,7 +3,7 @@
 
   <div class="empty" *ngIf="items.length === 0">Nothing saved yet.</div>
 
-  <div class="row" *ngFor="let item of items">
+  <div class="row" *ngFor="let item of items" [routerLink]="['/item', item.id]">
     <div class="meta">
       <span class="type">{{ item.type }}</span>
       <span class="date">{{ item.createdAt | date : 'short' }}</span>
@@ -12,7 +12,7 @@
     <div class="lang" *ngIf="item.type === 'snippet'">
       {{ item.language }}
     </div>
-    
+
     <div class="item-title" *ngIf="item.title">
       {{ item.title }}
     </div>
@@ -30,7 +30,7 @@
     <button
       class="copy"
       type="button"
-      (click)="copySnippet(item.text, item.id)"
+      (click)="$event.preventDefault(); $event.stopPropagation(); copySnippet(item.text, item.id)"
     >
       {{ copiedId === item.id ? 'Copied ✅' : 'Copy' }}
     </button>
@@ -41,7 +41,7 @@
       *ngIf="confirmId !== item.id"
       class="del"
       type="button"
-      (click)="requestDelete(item.id)"
+      (click)="$event.preventDefault(); $event.stopPropagation(); requestDelete(item.id)"
     >
       Delete
     </button>
@@ -49,8 +49,8 @@
     <!-- Confirmation UI -->
     <div class="confirm" *ngIf="confirmId === item.id">
       <span>Are you sure?</span>
-      <button class="yes" (click)="confirmDelete()">Yes</button>
-      <button class="no" (click)="cancelDelete()">No</button>
+      <button class="yes" (click)="$event.preventDefault(); $event.stopPropagation(); confirmDelete()">Yes</button>
+      <button class="no" (click)="$event.preventDefault(); $event.stopPropagation(); cancelDelete()">No</button>
     </div>
   </div>
 </div>

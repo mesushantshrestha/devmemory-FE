@@ -1,7 +1,7 @@
-<div class="card" *ngIf="item; else empty">
+<div class="card" *ngIf="item; else empty" [routerLink]="['/item', item.id]">
   <div class="header">
     <span>Trigger Card</span>
-    <button class="btn-pin" type="button" (click)="onPin()" [title]="isPinned ? 'Unpin' : 'Pin'">
+    <button class="btn-pin" type="button" (click)="$event.preventDefault(); $event.stopPropagation(); onPin()" [title]="isPinned ? 'Unpin' : 'Pin'">
       <span class="pin-icon">{{ isPinned ? '📌' : '📍' }}</span>
       <span class="pin-text">{{ isPinned ? 'Pinned' : 'Pin' }}</span>
     </button>

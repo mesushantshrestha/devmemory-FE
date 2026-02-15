@@ -1,0 +1,44 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.title {
+  margin: 10px 0 10px;
+}
+
+.meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.date {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.code {
+  background: #111;
+  color: #f5f5f5;
+  padding: 12px;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.text {
+  white-space: pre-wrap;
+  line-height: 1.5;
+}

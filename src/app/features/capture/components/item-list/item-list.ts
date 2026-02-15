@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CaptureItem } from '../../../../core/models/capture-item';
 import { CommonModule } from '@angular/common';
 import { Clipboard, ClipboardModule } from '@angular/cdk/clipboard';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './item-list.html',
   styleUrl: './item-list.scss',
 })
