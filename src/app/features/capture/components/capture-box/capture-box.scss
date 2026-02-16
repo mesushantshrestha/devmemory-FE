@@ -6,8 +6,15 @@
   border-radius: 12px;
 }
 
+.box * {
+  box-sizing: border-box;
+}
+
 .title-input {
+  display: block;
+  min-width: 0;
   width: 100%;
+  max-width: 100%;
   padding: 10px;
   border-radius: 12px;
   border: 1px solid #ddd;
@@ -32,7 +39,10 @@
 }
 
 .input {
+  display: block;
+  min-width: 0;
   width: 100%;
+  max-width: 100%;
   padding: 10px;
   border-radius: 12px;
   border: 1px solid #ddd;

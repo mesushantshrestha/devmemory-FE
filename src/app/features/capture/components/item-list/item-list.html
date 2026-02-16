@@ -21,9 +21,7 @@
       {{ item.text }}
     </div>
 
-    <pre class="code" *ngIf="item.type === 'snippet'">
-    {{ item.text }}
-    </pre>
+    <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
 
 
     <div class="snippet-actions" *ngIf="item.type === 'snippet'">
