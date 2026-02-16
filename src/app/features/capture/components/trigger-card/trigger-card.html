@@ -1,6 +1,9 @@
-<div class="card" *ngIf="item; else empty" [routerLink]="['/item', item.id]">
-  <div class="header">
-    <span>Trigger Card</span>
+<div class="card popup" *ngIf="item; else empty" [routerLink]="['/item', item.id]">
+  <div class="popup-head">
+    <div class="live-badge">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span>Live Trigger</span>
+    </div>
     <button class="btn-pin" type="button" (click)="$event.preventDefault(); $event.stopPropagation(); onPin()" [title]="isPinned ? 'Unpin' : 'Pin'">
       <span class="pin-icon">{{ isPinned ? '📌' : '📍' }}</span>
       <span class="pin-text">{{ isPinned ? 'Pinned' : 'Pin' }}</span>
@@ -8,8 +11,11 @@
   </div>
 
   <div class="summary">
-    <div class="type">
-      {{ item.type }} <span *ngIf="item.language">• {{ item.language }}</span>
+    <div class="type-row">
+      <div class="type">
+        {{ item.type }} <span *ngIf="item.language">• {{ item.language }}</span>
+      </div>
+      <div class="time">{{ item.createdAt | date : 'shortTime' }}</div>
     </div>
     <div class="title" *ngIf="item.title">{{ item.title }}</div>
     <div class="body" *ngIf="item">
@@ -17,14 +23,16 @@
       <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
     </div>
   </div>
-
-  <div class="actions">
-  </div>
 </div>
 
 <ng-template #empty>
-  <div class="card muted">
-    <div class="header">Trigger Card</div>
+  <div class="card muted popup">
+    <div class="popup-head">
+      <div class="live-badge">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Live Trigger</span>
+      </div>
+    </div>
     <div class="hint">Save something to see suggestions.</div>
   </div>
 </ng-template>
