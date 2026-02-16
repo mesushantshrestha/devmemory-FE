@@ -1,38 +1,48 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, take } from 'rxjs';
+import { BehaviorSubject, take, tap } from 'rxjs';
 import { CaptureItem } from '../models/capture-item';
 import { CAPTURE_REPOSITORY, CaptureRepository } from '../repositories/capture.repository';
+import { CaptureApiService, CreateCaptureItemRequest, UpdateCaptureItemRequest } from './capture-api-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CaptureService {
-  private readonly _items$ = new BehaviorSubject<CaptureItem[]>([]);
-  readonly items$ = this._items$.asObservable();
-
-  get snapshot(): CaptureItem[] {
-    return this._items$.value;
-  }
-
-  constructor(@Inject(CAPTURE_REPOSITORY) private repo: CaptureRepository) {}
+  private readonly _itemsSubject = new BehaviorSubject<CaptureItem[]>([]);
+  readonly items$ = this._itemsSubject.asObservable();
+  constructor(private api: CaptureApiService) { }
 
   load(): void {
-    this.repo.getAll().pipe(take(1)).subscribe(items => this._items$.next(items));
+    this.api.getAll().subscribe(items => {
+      this._itemsSubject.next(items);
+    });
   }
 
-  add(item: CaptureItem): void {
-    this.repo.add(item).pipe(take(1)).subscribe(items => this._items$.next(items));
+  add(req: CreateCaptureItemRequest) {
+    return this.api.create(req).pipe(
+      tap(saved => {
+        const current = this._itemsSubject.value;
+        this._itemsSubject.next([saved, ...current]);
+      })
+    );
   }
 
-  remove(id: string): void {
-    this.repo.remove(id).pipe(take(1)).subscribe(items => this._items$.next(items));
+  remove(id: string) {
+    return this.api.delete(id).pipe(
+      tap(() => {
+        const current = this._itemsSubject.value;
+        this._itemsSubject.next(current.filter(x => x.id !== id));
+      })
+    );
   }
 
-  clear(): void {
-    this.repo.clear().pipe(take(1)).subscribe(items => this._items$.next(items));
+  update(id: string, patch: UpdateCaptureItemRequest) {
+    return this.api.update(id, patch).pipe(
+      tap(updated => {
+        const current = this._itemsSubject.value;
+        const next = current.map(x => (x.id === id ? updated : x));
+        this._itemsSubject.next(next);
+      })
+    );
   }
-
-  update(id: string, patch: Partial<CaptureItem>): void {
-  this.repo.update(id, patch).pipe(take(1)).subscribe(items => this._items$.next(items));
-}
 }

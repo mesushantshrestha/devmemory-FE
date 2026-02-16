@@ -5,11 +5,13 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { CAPTURE_REPOSITORY } from './core/repositories/capture.repository';
 import { LocalCaptureRepository } from './core/repositories/local-capture.repository';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), 
+    provideRouter(routes),
     provideClientHydration(withEventReplay()),
     // Repository binding (swap this later to ApiCaptureRepository)
     { provide: CAPTURE_REPOSITORY, useClass: LocalCaptureRepository },

@@ -47,7 +47,7 @@ export class CapturePage implements OnInit {
   }
 
   onSaved(item: CaptureItem): void {
-    this.captureService.add(item);
+    this.captureService.add(item).subscribe();
   }
 
 
