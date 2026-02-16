@@ -57,44 +57,30 @@
   color: #b54708;
 }
 
-.del {
-  width: fit-content;
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
-
 .confirm {
   display: flex;
   gap: 8px;
   align-items: center;
   font-size: 13px;
-}
-
-.yes {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 0;
-  background: var(--accent);
-  color: var(--accent-contrast);
-}
-
-.no {
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
+  justify-content: flex-end;
 }
 
 .code {
   background: var(--code-bg);
   color: var(--code-text);
   padding: 12px;
+  min-height: 136px;
   border-radius: 10px;
-  overflow-x: auto;
+  overflow-x: hidden;
   font-size: 13px;
   font-family: monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.text {
+  min-height: 48px;
 }
 
 .lang {
@@ -102,16 +88,72 @@
   color: var(--muted);
 }
 
-.snippet-actions {
+.row-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
 }
 
-.copy {
-  padding: 8px 10px;
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--surface);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.copy-btn {
+  width: auto;
+  height: auto;
+  padding: 8px 10px;
+  gap: 6px;
+}
+
+.copy-btn span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.icon-btn:focus {
+  outline: 2px solid #dbe6ff;
+  outline-offset: 1px;
+  border-color: #a9c1ff;
+}
+
+.icon-btn-danger {
+  color: #b42318;
+  border-color: #fecdca;
+  background: #fef3f2;
+}
+
+.icon-btn-confirm {
+  color: #027a48;
+  border-color: #a6f4c5;
+  background: #ecfdf3;
+}
+
+.icon-btn.copied {
+  color: #027a48;
+  border-color: #a6f4c5;
+  background: #ecfdf3;
 }
 
 .item-title {

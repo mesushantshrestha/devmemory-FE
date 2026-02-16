@@ -88,6 +88,27 @@
     <ng-container *ngIf="!isEditing; else inlineEditBody">
       <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
       <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
+
+      <div class="body-copy" *ngIf="item.text">
+        <button
+          class="copy-body-btn"
+          type="button"
+          (click)="copySnippet(item.text)"
+          [attr.aria-label]="copied ? 'Copied' : 'Copy'"
+          [attr.title]="copied ? 'Copied' : 'Copy'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" *ngIf="!copied; else copiedIconInline">
+            <rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <ng-template #copiedIconInline>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </ng-template>
+          <span>{{ copied ? 'Copied' : 'Copy' }}</span>
+        </button>
+      </div>
     </ng-container>
 
     <ng-template #inlineEditBody>

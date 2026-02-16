@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { CaptureApiService } from '../../../../core/services/capture-api-service';
 import { CaptureService } from '../../../../core/services/capture';
 import { FormsModule } from '@angular/forms';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-item-detail-page',
@@ -19,10 +20,12 @@ export class ItemDetailPage implements OnInit {
   editText = '';
   editDone = false;
   confirmDelete = false;
+  copied = false;
   constructor(private route: ActivatedRoute,
     private api: CaptureApiService,
     private router: Router,
-    private captureService: CaptureService) { }
+    private captureService: CaptureService,
+    private clipboard: Clipboard) { }
 
   private loadItem(id: string): Observable<CaptureItem | undefined> {
     return this.api.getById(id).pipe(
@@ -98,6 +101,16 @@ export class ItemDetailPage implements OnInit {
         this.item$ = this.loadItem(item.id);
       }
     });
+  }
+
+  copySnippet(text: string) {
+    const ok = this.clipboard.copy(text);
+    if (!ok) return;
+
+    this.copied = true;
+    setTimeout(() => {
+      this.copied = false;
+    }, 1200);
   }
 
   requestDelete() {

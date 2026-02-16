@@ -34,31 +34,55 @@
     <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
 
 
-    <div class="snippet-actions" *ngIf="item.type === 'snippet'">
-    <button
-      class="copy"
-      type="button"
-      (click)="$event.preventDefault(); $event.stopPropagation(); copySnippet(item.text, item.id)"
-    >
-      {{ copiedId === item.id ? 'Copied ✅' : 'Copy' }}
-    </button>
-    </div>
+    <div class="row-actions">
+      <button
+        class="icon-btn copy-btn"
+        [class.copied]="copiedId === item.id"
+        type="button"
+        *ngIf="item.type === 'snippet'"
+        (click)="$event.preventDefault(); $event.stopPropagation(); copySnippet(item.text, item.id)"
+        [attr.aria-label]="copiedId === item.id ? 'Copied' : 'Copy snippet'"
+        [attr.title]="copiedId === item.id ? 'Copied' : 'Copy snippet'"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" *ngIf="copiedId !== item.id; else copiedIcon">
+          <rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M7 15H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <ng-template #copiedIcon>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </ng-template>
+        <span>{{ copiedId === item.id ? 'Copied' : 'Copy' }}</span>
+      </button>
 
-    <!-- Normal Delete Button -->
-    <button
-      *ngIf="confirmId !== item.id"
-      class="del"
-      type="button"
-      (click)="$event.preventDefault(); $event.stopPropagation(); requestDelete(item.id)"
-    >
-      Delete
-    </button>
+      <button
+        *ngIf="confirmId !== item.id"
+        class="icon-btn icon-btn-danger"
+        type="button"
+        (click)="$event.preventDefault(); $event.stopPropagation(); requestDelete(item.id)"
+        aria-label="Delete item"
+        title="Delete item"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M9 7V5h6v2m-8 0 1 12h8l1-12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
 
     <!-- Confirmation UI -->
     <div class="confirm" *ngIf="confirmId === item.id">
       <span>Are you sure?</span>
-      <button class="yes" (click)="$event.preventDefault(); $event.stopPropagation(); confirmDelete()">Yes</button>
-      <button class="no" (click)="$event.preventDefault(); $event.stopPropagation(); cancelDelete()">No</button>
+      <button class="icon-btn icon-btn-confirm" type="button" (click)="$event.preventDefault(); $event.stopPropagation(); confirmDelete()" aria-label="Confirm delete" title="Confirm delete">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="icon-btn" type="button" (click)="$event.preventDefault(); $event.stopPropagation(); cancelDelete()" aria-label="Cancel delete" title="Cancel delete">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </div>
   </div>
 </div>

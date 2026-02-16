@@ -150,6 +150,7 @@
 }
 
 .code-edit textarea {
+  min-height: 320px;
   background: #0b1220;
   border-color: #334155;
   color: var(--code-text);
@@ -259,10 +260,14 @@
   background: var(--code-bg);
   color: var(--code-text);
   padding: 12px;
+  min-height: 320px;
   border-radius: 14px;
-  overflow-x: auto;
+  overflow-x: hidden;
   font-family: monospace;
   font-size: 13px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .text {
@@ -273,4 +278,42 @@
   box-shadow: var(--shadow-sm);
   white-space: pre-wrap;
   line-height: 1.5;
+}
+
+.body-copy {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.copy-body-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-body-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.copy-body-btn:hover {
+  color: var(--text);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.copy-body-btn:focus {
+  outline: 2px solid #dbe6ff;
+  outline-offset: 1px;
+  border-color: #a9c1ff;
 }
