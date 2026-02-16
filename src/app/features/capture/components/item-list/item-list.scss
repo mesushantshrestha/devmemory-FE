@@ -33,6 +33,28 @@
   gap: 10px;
   font-size: 12px;
   color: var(--muted);
+  align-items: center;
+}
+
+.task-state-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-state-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.task-state-icon.done {
+  color: #027a48;
+}
+
+.task-state-icon.pending {
+  color: #b54708;
 }
 
 .del {

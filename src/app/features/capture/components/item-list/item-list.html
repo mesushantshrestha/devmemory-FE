@@ -7,6 +7,16 @@
     <div class="meta">
       <span class="type">{{ item.type }}</span>
       <span class="date">{{ item.createdAt | date : 'short' }}</span>
+      <span class="task-state-icon" *ngIf="item.type === 'task'" [class.done]="!!item.done" [class.pending]="!item.done" [attr.title]="item.done ? 'Done' : 'Pending'" [attr.aria-label]="item.done ? 'Done' : 'Pending'">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" *ngIf="item.done; else pendingTaskIcon">
+          <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <ng-template #pendingTaskIcon>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </ng-template>
+      </span>
     </div>
 
     <div class="lang" *ngIf="item.type === 'snippet'">

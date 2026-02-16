@@ -7,11 +7,105 @@
     <div class="meta">
       <span class="badge">{{ item.type }}</span>
       <span class="badge" *ngIf="item.language">{{ item.language }}</span>
+      <button
+        class="task-state"
+        type="button"
+        *ngIf="item.type === 'task'"
+        [class.done]="!!item.done"
+        [class.pending]="!item.done"
+        [disabled]="confirmDelete"
+        (click)="toggleTaskDone(item)"
+        [attr.aria-label]="item.done ? 'Mark as pending' : 'Mark as done'"
+        [attr.title]="item.done ? 'Mark as pending' : 'Mark as done'"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" *ngIf="item.done; else pendingIcon">
+          <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <ng-template #pendingIcon>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </ng-template>
+        <span>{{ item.done ? 'Done' : 'Pending' }}</span>
+      </button>
       <span class="date">{{ item.createdAt | date:'medium' }}</span>
     </div>
 
-    <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
-    <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
+    <div class="body-actions">
+      <button
+        class="icon-btn"
+        type="button"
+        (click)="startEdit(item)"
+        *ngIf="!isEditing && !confirmDelete"
+        aria-label="Edit body"
+        title="Edit body"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button
+        class="icon-btn icon-btn-danger"
+        type="button"
+        (click)="requestDelete()"
+        *ngIf="!confirmDelete"
+        aria-label="Delete item"
+        title="Delete item"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M9 7V5h6v2m-8 0 1 12h8l1-12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <ng-container *ngIf="confirmDelete">
+        <span class="confirm-text">Delete this item?</span>
+        <button
+          class="icon-btn icon-btn-confirm"
+          type="button"
+          (click)="doDelete(item)"
+          aria-label="Confirm delete"
+          title="Confirm delete"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button
+          class="icon-btn"
+          type="button"
+          (click)="cancelDelete()"
+          aria-label="Cancel delete"
+          title="Cancel delete"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="!isEditing; else inlineEditBody">
+      <pre class="code" *ngIf="item.type === 'snippet'">{{ item.text }}</pre>
+      <div class="text" *ngIf="item.type !== 'snippet'">{{ item.text }}</div>
+    </ng-container>
+
+    <ng-template #inlineEditBody>
+      <div class="text edit-inline" [class.code-edit]="item.type === 'snippet'">
+        <label>Body</label>
+        <textarea rows="10" [(ngModel)]="editText"></textarea>
+
+        <div *ngIf="(item.type + '').toLowerCase() === 'task'" class="done-row">
+          <input type="checkbox" [(ngModel)]="editDone" />
+          <span>Done</span>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" type="button" (click)="saveEdit(item)">Save</button>
+          <button class="btn btn-secondary" type="button" (click)="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+    </ng-template>
   </ng-container>
 
   <ng-template #notFound>
