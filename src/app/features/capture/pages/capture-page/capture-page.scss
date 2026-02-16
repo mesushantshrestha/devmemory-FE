@@ -1,10 +1,33 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
 .page {
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 760px;
+  margin: 12px auto 28px;
   padding: 16px;
 }
 
 .title {
-  margin: 8px 0 16px;
-  font-size: 22px;
+  margin: 10px 0 18px;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.saved-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 16px;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.saved-link:hover {
+  transform: translateX(2px);
 }

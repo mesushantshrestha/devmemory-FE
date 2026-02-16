@@ -1,9 +1,11 @@
 .box {
   display: grid;
-  gap: 10px;
-  padding: 12px;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .box * {
@@ -15,9 +17,9 @@
   min-width: 0;
   width: 100%;
   max-width: 100%;
-  padding: 10px;
+  padding: 11px 12px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   font-size: 14px;
 }
 
@@ -29,13 +31,18 @@
 
 .chip {
   padding: 8px 10px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fff;
+  background: var(--surface);
+  color: var(--muted);
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .chip.active {
-  border-color: #111;
+  border-color: #b6ccff;
+  background: #eef4ff;
+  color: var(--accent);
 }
 
 .input {
@@ -43,11 +50,12 @@
   min-width: 0;
   width: 100%;
   max-width: 100%;
-  padding: 10px;
+  padding: 11px 12px;
   border-radius: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   resize: none;
-  font-size: 16px; // helps mobile
+  min-height: 110px;
+  font-size: 15px;
 }
 
 .save {
@@ -55,7 +63,38 @@
   padding: 12px;
   border-radius: 12px;
   border: 0;
-  background: #111;
-  color: #fff;
-  font-size: 16px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 15px;
+  font-weight: 600;
+  transition: filter 0.2s ease;
+}
+
+.save:hover {
+  filter: brightness(0.95);
+}
+
+.title-input:focus,
+.input:focus,
+.chip:focus,
+.save:focus,
+.language-select select:focus {
+  outline: 2px solid #dbe6ff;
+  outline-offset: 1px;
+  border-color: #a9c1ff;
+}
+
+.language-select {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.language-select select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
