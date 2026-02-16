@@ -4,8 +4,9 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-type ApiCaptureItem = Omit<CaptureItem, 'type'> & {
-  type: string;
+type ApiCaptureItem = Partial<Omit<CaptureItem, 'type' | 'id'>> & {
+  id?: string;
+  type?: string;
 };
 
 export type CreateCaptureItemRequest = {
@@ -37,9 +38,16 @@ export class CaptureApiService {
   }
 
   private toCaptureItem(item: ApiCaptureItem): CaptureItem {
+    const id = item.id;
     return {
-      ...item,
+      id: String(id ?? ''),
+      title: item.title ?? undefined,
+      text: String(item.text ?? ''),
+      createdAt: String(item.createdAt ?? new Date(0).toISOString()),
       type: this.normalizeType(item.type),
+      language: item.language ?? undefined,
+      pinned: item.pinned,
+      done: item.done,
     };
   }
 

@@ -75,7 +75,7 @@ export class SavedPage implements OnInit {
   }
 
   onDelete(id: string): void {
-    this.captureService.remove(id);
+    this.captureService.remove(id).subscribe();
   }
 
   onSearchChange(value: string): void {
