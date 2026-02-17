@@ -5,11 +5,12 @@ import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { CAPTURE_REPOSITORY } from './core/repositories/capture.repository';
 import { LocalCaptureRepository } from './core/repositories/local-capture.repository';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { apiErrorInterceptor } from './core/interceptors/api-error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([apiErrorInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),

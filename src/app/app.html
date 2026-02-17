@@ -1,1 +1,23 @@
 <router-outlet></router-outlet>
+
+<div class="toast-host" aria-live="polite" aria-atomic="false">
+	@for (toast of toasts(); track toast.id) {
+		<article class="toast" role="alert">
+			<div class="toast-header">
+				<strong>{{ toast.error || 'Error' }}</strong>
+				<button type="button" (click)="dismissToast($event, toast.id)" aria-label="Dismiss error">✕</button>
+			</div>
+			<p class="toast-message">{{ toast.message }}</p>
+			@if (toast.status || toast.timestamp) {
+				<div class="toast-meta">
+					@if (toast.status) {
+						<span>Status: {{ toast.status }}</span>
+					}
+					@if (toast.timestamp) {
+						<span>{{ toast.timestamp }}</span>
+					}
+				</div>
+			}
+		</article>
+	}
+</div>
