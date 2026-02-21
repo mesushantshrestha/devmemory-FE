@@ -29,10 +29,6 @@ export class LoginPage implements OnInit {
     this.auth.loginWithGoogle();
   }
 
-  onSwitchAccount(): void {
-    this.auth.loginWithGoogle();
-  }
-
   onLogout(): void {
     this.auth.logout().subscribe(() => {
       this.router.navigateByUrl('/');
