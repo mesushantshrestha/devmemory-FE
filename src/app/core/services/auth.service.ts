@@ -61,22 +61,22 @@ export class AuthService {
     window.location.href = `${environment.apiBaseUrl}/oauth2/authorization/google`;
   }
 
-  logout(): void {
+  logout() {
     this.statusSignal.set('loading');
 
-    this.http
-      .get<void>(`${this.baseUrl}/logout`, { withCredentials: true })
+    return this.http
+      .post<void>(`${this.baseUrl}/logout`, {}, { withCredentials: true })
       .pipe(
         tap(() => {
           this.userSignal.set(null);
           this.statusSignal.set('idle');
         }),
         catchError(() => {
+          this.userSignal.set(null);
           this.statusSignal.set('error');
           return of(void 0);
         })
-      )
-      .subscribe();
+      );
   }
 
   setLoggedOut(): void {

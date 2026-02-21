@@ -1,4 +1,19 @@
 <nav class="nav">
-  <a routerLink="/capture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Capture</a>
-  <a routerLink="/saved" routerLinkActive="active">Saved</a>
+  <div class="nav-links">
+    <a routerLink="/capture" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Capture</a>
+    <a routerLink="/saved" routerLinkActive="active">Saved</a>
+  </div>
+
+  @if (isAuthenticated()) {
+    <div class="nav-actions">
+      <div class="avatar" aria-hidden="true">
+        @if (user()?.avatarUrl) {
+          <img [src]="user()?.avatarUrl ?? ''" alt="" />
+        } @else {
+          <span>{{ initials() }}</span>
+        }
+      </div>
+      <button type="button" class="logout" (click)="onLogout()">Logout</button>
+    </div>
+  }
 </nav>

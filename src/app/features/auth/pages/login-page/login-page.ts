@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 })
 export class LoginPage implements OnInit {
   private readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
 
   readonly user = this.auth.user;
   readonly status = this.auth.status;
@@ -29,6 +30,8 @@ export class LoginPage implements OnInit {
   }
 
   onLogout(): void {
-    this.auth.logout();
+    this.auth.logout().subscribe(() => {
+      this.router.navigateByUrl('/');
+    });
   }
 }
