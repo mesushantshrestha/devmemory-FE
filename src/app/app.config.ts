@@ -7,11 +7,12 @@ import { CAPTURE_REPOSITORY } from './core/repositories/capture.repository';
 import { LocalCaptureRepository } from './core/repositories/local-capture.repository';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { apiErrorInterceptor } from './core/interceptors/api-error.interceptor';
+import { credentialsInterceptor } from './core/interceptors/credentials.interceptor';
 import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([apiErrorInterceptor])),
+    provideHttpClient(withInterceptors([credentialsInterceptor, apiErrorInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),

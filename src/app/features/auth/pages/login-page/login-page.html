@@ -1,0 +1,62 @@
+<main class="shell" aria-labelledby="login-title">
+  <section class="card" aria-live="polite">
+    <header class="header">
+      <p class="eyebrow">DevMemory</p>
+      <h1 id="login-title">Sign in to continue</h1>
+      <p class="subtitle">Capture ideas, tasks, and snippets in one place.</p>
+    </header>
+
+    @if (isAuthenticated()) {
+      <div class="user">
+        <div class="avatar" aria-hidden="true">
+          <span>{{ greeting().slice(0, 1).toUpperCase() }}</span>
+        </div>
+        <div class="user-details">
+          <p class="user-name">Welcome back, {{ greeting() }}.</p>
+          @if (user()?.email) {
+            <p class="user-email">{{ user()?.email }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="primary" routerLink="/capture">Continue to app</a>
+        <button type="button" class="ghost" (click)="onLogout()" [disabled]="status() === 'loading'">
+          Log out
+        </button>
+      </div>
+    } @else {
+      <button type="button" class="google" (click)="onLogin()" [disabled]="status() === 'loading'">
+        <span class="google-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="presentation" focusable="false">
+            <path
+              fill="#FFC107"
+              d="M43.611 20.083H42V20H24v8h11.303C33.636 32.657 29.243 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.96 3.04l5.657-5.657C34.046 6.053 29.272 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.651-.389-3.917Z"
+            />
+            <path
+              fill="#FF3D00"
+              d="M6.306 14.691 12.853 19.5C14.19 16.066 18.007 13.5 24 13.5c3.059 0 5.842 1.154 7.96 3.04l5.657-5.657C34.046 6.053 29.272 4 24 4c-7.717 0-14.434 4.368-17.694 10.691Z"
+            />
+            <path
+              fill="#4CAF50"
+              d="M24 44c5.166 0 9.86-1.977 13.409-5.197l-6.19-5.238C29.16 34.932 26.729 36 24 36c-5.219 0-9.626-3.346-11.303-8H6.306v5.691C9.566 39.632 16.283 44 24 44Z"
+            />
+            <path
+              fill="#1976D2"
+              d="M43.611 20.083H42V20H24v8h11.303c-1.083 2.91-3.394 5.27-6.084 6.565h.001l6.19 5.238C34.95 41.207 44 36 44 24c0-1.341-.138-2.651-.389-3.917Z"
+            />
+          </svg>
+        </span>
+        <span>Continue with Google</span>
+      </button>
+
+      @if (status() === 'loading') {
+        <p class="status">Checking your account…</p>
+      }
+
+      @if (status() === 'error') {
+        <p class="status error">We couldn’t sign you in. Please try again.</p>
+      }
+    }
+  </section>
+</main>
