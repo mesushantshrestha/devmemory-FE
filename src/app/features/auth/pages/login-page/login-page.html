@@ -9,7 +9,11 @@
     @if (isAuthenticated()) {
       <div class="user">
         <div class="avatar" aria-hidden="true">
-          <span>{{ greeting().slice(0, 1).toUpperCase() }}</span>
+          @if (user()?.pictureUrl) {
+            <img [src]="user()?.pictureUrl ?? ''" alt="" />
+          } @else {
+            <span>{{ greeting().slice(0, 1).toUpperCase() }}</span>
+          }
         </div>
         <div class="user-details">
           <p class="user-name">Welcome back, {{ greeting() }}.</p>
@@ -21,6 +25,9 @@
 
       <div class="actions">
         <a class="primary" routerLink="/capture">Continue to app</a>
+        <button type="button" class="ghost" (click)="onSwitchAccount()" [disabled]="status() === 'loading'">
+          Sign in with different account
+        </button>
         <button type="button" class="ghost" (click)="onLogout()" [disabled]="status() === 'loading'">
           Log out
         </button>

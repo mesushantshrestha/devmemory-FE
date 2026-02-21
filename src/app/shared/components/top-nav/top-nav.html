@@ -7,8 +7,8 @@
   @if (isAuthenticated()) {
     <div class="nav-actions">
       <div class="avatar" aria-hidden="true">
-        @if (user()?.avatarUrl) {
-          <img [src]="user()?.avatarUrl ?? ''" alt="" />
+        @if (user()?.pictureUrl) {
+          <img [src]="user()?.pictureUrl ?? ''" alt="" />
         } @else {
           <span>{{ initials() }}</span>
         }
