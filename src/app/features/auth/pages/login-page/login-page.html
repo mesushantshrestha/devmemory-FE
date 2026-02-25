@@ -25,10 +25,10 @@
 
       <div class="actions">
         <a class="primary" routerLink="/capture">Continue to app</a>
-        <button type="button" class="ghost" (click)="onLogout()" [disabled]="status() === 'loading'">
-          Log out
-        </button>
       </div>
+      <button type="button" class="switch-account" (click)="onSignInDifferent()" [disabled]="status() === 'loading'">
+        Sign in with different account
+      </button>
     } @else {
       <button type="button" class="google" (click)="onLogin()" [disabled]="status() === 'loading'">
         <span class="google-icon" aria-hidden="true">

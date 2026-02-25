@@ -29,9 +29,7 @@ export class LoginPage implements OnInit {
     this.auth.loginWithGoogle();
   }
 
-  onLogout(): void {
-    this.auth.logout().subscribe(() => {
-      this.router.navigateByUrl('/');
-    });
+  onSignInDifferent(): void {
+    this.auth.loginWithDifferentGoogle();
   }
 }

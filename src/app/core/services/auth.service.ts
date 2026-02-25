@@ -58,7 +58,12 @@ export class AuthService {
 
   loginWithGoogle(): void {
     this.statusSignal.set('loading');
-    window.location.href = `${environment.apiBaseUrl}/oauth2/authorization/google`;
+    window.location.replace(`${environment.apiBaseUrl}/oauth2/authorization/google`);
+  }
+
+  loginWithDifferentGoogle(): void {
+    this.statusSignal.set('loading');
+    window.location.replace(`${environment.apiBaseUrl}/oauth2/authorization-switch/google`);
   }
 
   logout() {

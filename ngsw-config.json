@@ -1,6 +1,12 @@
 {
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
-  "index": "/index.html",
+  "index": "/index.csr.html",
+  "navigationUrls": [
+    "/**",
+    "!/api/**",
+    "!/oauth2/**",
+    "!/login/**"
+  ],
   "assetGroups": [
     {
       "name": "app",

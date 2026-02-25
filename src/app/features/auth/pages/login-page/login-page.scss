@@ -148,6 +148,30 @@
   color: #ff6b6b;
 }
 
+.switch-account {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+  color: #4b5160;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.switch-account:hover:not(:disabled) {
+  color: rgba(114, 90, 255, 0.8);
+  background: rgba(114, 90, 255, 0.05);
+}
+
+.switch-account:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 button:disabled,
 .google:disabled,
 .primary:disabled,
