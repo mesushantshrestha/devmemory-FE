@@ -40,7 +40,7 @@ export const apiErrorInterceptor: HttpInterceptorFn = (req, next) => {
         const errorText = body.error ?? (status ? `HTTP ${status}` : 'Request Error');
         const message = body.message ?? error.message ?? 'Something went wrong.';
 
-        if (status === 401 || status === 403) {
+        if (status === 401 || status === 403 || status === 504) {
           auth.setLoggedOut();
         }
 
